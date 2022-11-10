@@ -1,19 +1,19 @@
 const main = async() =>
 {
-    const [owner,randomPerson]= await hre.ethers.getSigners();
+    const [deployer]= await hre.ethers.getSigners();
+    const accountBalance= await deployer.getBalance();
+
+    
+    console.log("deploying contracts with account:", deployer.address);
+    console.log("Acoount Balance:", accountBalance.toString());
+    //await cookieContract.getTotalCookies();
     //compile contract and generate the necessary files we need to work with our contract under the artifacts directory
     const cookieContractFactory = await hre.ethers.getContractFactory("CookiePortal");
     const cookieContract = await cookieContractFactory.deploy();
     await cookieContract.deployed();
-    console.log("contract is being deployed to:", cookieContract.address);
-    console.log("contract is being deployed by:", owner.address);
-    await cookieContract.getTotalCookies();
-    const firstcookieTkn = await cookieContract.cookie();
-    await firstcookieTkn.wait();
-    const secondcookieTkn = await cookieContract.connect(randomPerson).cookie();
-    await secondcookieTkn.wait();
 
-    await cookieContract.getTotalCookies();
+    console.log("CookiePortal Address :", cookieContract.address);
+    
 };
 
 const runMain = async () =>
