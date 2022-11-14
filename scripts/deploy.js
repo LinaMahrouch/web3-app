@@ -5,12 +5,13 @@ const main = async() =>
 
     
     console.log("deploying contracts with account:", deployer.address);
-    console.log("Acoount Balance:", accountBalance.toString());
+    console.log("Account Balance:", accountBalance.toString());
     //await cookieContract.getTotalCookies();
     //compile contract and generate the necessary files we need to work with our contract under the artifacts directory
     const cookieContractFactory = await hre.ethers.getContractFactory("CookiePortal");
     const cookieContract = await cookieContractFactory.deploy();
     await cookieContract.deployed();
+    // cookieContract.functions.mint(id, amount, {gasLimit: 40000000});
 
     console.log("CookiePortal Address :", cookieContract.address);
     
